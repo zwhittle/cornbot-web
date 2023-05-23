@@ -1,15 +1,5 @@
 import { AnalyticsEvent } from '@/utils/types'
 
-const events = [
-  {
-    name: 'Lindsay Walton',
-    title: 'Front-end Developer',
-    email: 'lindsay.walton@example.com',
-    role: 'Member',
-  },
-  // More people...
-]
-
 type Props = {
   events: AnalyticsEvent[]
 }
