@@ -46,7 +46,7 @@ export default function EventsTable({ events }: Props) {
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-200 bg-white'>
-                {events.map(event => (
+                {events && events.map(event => (
                   <tr key={event.id}>
                     <td className='w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-0'>
                       {event.type}
