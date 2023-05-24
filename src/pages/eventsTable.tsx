@@ -1,4 +1,5 @@
 import { AnalyticsEvent } from '@/utils/types'
+import { format } from 'date-fns'
 
 type Props = {
   events: AnalyticsEvent[]
@@ -15,7 +16,7 @@ export default function EventsTable({ events }: Props) {
                 <tr>
                   <th
                     scope='col'
-                    className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0'
+                    className='py-3.5 pl-5 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-2'
                   >
                     Type
                   </th>
@@ -43,22 +44,30 @@ export default function EventsTable({ events }: Props) {
                   >
                     Member
                   </th>
+                  <th
+                    scope='col'
+                    className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell'
+                  >
+                    Timestamp
+                  </th>
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-200 bg-white'>
                 {events && events.map(event => (
                   <tr key={event.id}>
-                    <td className='w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-0'>
+                    <td className='w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-2'>
                       {event.type}
                       <dl className='font-normal lg:hidden'>
                         <dt className='sr-only'>Type</dt>
-                        <dd className='mt-1 truncate text-gray-700'>{event.type}</dd>
+                        <dd className='mt-1 truncate text-gray-700'>{event.event}</dd>
                         <dt className='sr-only sm:hidden'>Guild</dt>
                         <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.guildId}</dd>
                         <dt className='sr-only sm:hidden'>Channel</dt>
                         <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.channelId}</dd>
                         <dt className='sr-only sm:hidden'>Member</dt>
                         <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.memberId}</dd>
+                        <dt className='sr-only sm:hidden'>Timestamp</dt>
+                        <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.timestamp?.toString()}</dd>
                       </dl>
                     </td>
                     <td className='hidden px-3 py-4 text-sm text-gray-500 lg:table-cell'>
@@ -72,6 +81,9 @@ export default function EventsTable({ events }: Props) {
                     </td>
                     <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
                       {event.memberId}
+                    </td>
+                    <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
+                      {event.timestamp?.toLocaleString('en-us', {timeZone: 'CST'})}
                     </td>
                   </tr>
                 ))}
