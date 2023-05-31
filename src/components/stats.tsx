@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { AnalyticsApiData } from './api/analytics'
+import { AnalyticsApiData } from '../pages/api/analytics'
 import { AnalyticsEvent } from '@/utils/types'
 import { fetcher } from '@/utils/utils'
 
