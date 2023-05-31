@@ -22,3 +22,23 @@ export interface Guild {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface Member {
+  id: string
+  name: string
+  avatar: string
+  displayHexColor: string
+  displayName: string
+  nickname: string
+  pending: boolean
+  premiumSince: Date
+  guildId: string
+  pronouns: string
+  birthdayMonth: number
+  birthdayDay: number
+  birthdayPublic: boolean
+  joinedAt: Date
+  corns: number
+  createdAt: Date
+  updatedAt: Date
+}

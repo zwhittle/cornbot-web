@@ -13,6 +13,7 @@ import {
 import SortDropdown from '@/components/SortDropdown'
 import GuildsList from '@/components/GuildsList'
 import Sidebar from '@/components/Sidebar'
+import MembersList from '@/components/MembersList'
 
 const navigation = [
   { name: 'Guilds', href: '#', icon: FolderIcon, current: true },
@@ -21,7 +22,6 @@ const navigation = [
   { name: 'Tours', href: '#', icon: GlobeAltIcon, current: false },
   { name: 'Settings', href: '#', icon: Cog6ToothIcon, current: false },
 ]
-
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -73,8 +73,8 @@ export default function Home() {
               <SortDropdown />
             </header>
 
-            {/* Deployment list */}
-            <GuildsList />
+            {/* <GuildsList /> */}
+            <MembersList />
           </main>
 
           {/* Activity feed */}
