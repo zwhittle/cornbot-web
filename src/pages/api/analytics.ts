@@ -14,7 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     console.log('Internal Server Error')
   } else {
     const events_data = await events_res.json()
-    console.log(events_data)
     res.status(200).json({
       events: events_data,
     })
