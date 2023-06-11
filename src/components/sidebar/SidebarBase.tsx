@@ -1,12 +1,5 @@
-import {
-  Cog6ToothIcon,
-  FolderIcon,
-  GlobeAltIcon,
-  ServerIcon,
-  SignalIcon,
-} from '@heroicons/react/24/outline'
 import useSWR from 'swr'
-import { GuildsResponse } from '@/pages/api/getGuilds'
+import { GuildsResponse } from '@/pages/api/guilds'
 import { fetcher } from '@/utils/utils'
 import { useSession } from 'next-auth/react'
 import { Dispatch, ForwardRefExoticComponent, RefAttributes, SVGProps, SetStateAction } from 'react'
@@ -31,13 +24,11 @@ type SidebarBaseProps = {
 }
 
 export default function SidebarBase({ selectedItem, setSelectedItem, selectedGuild, setSelectedGuild, navItems }: SidebarBaseProps) {
-  const { data, error, isLoading } = useSWR<GuildsResponse>('/api/getGuilds', fetcher)
+  const { data, error, isLoading } = useSWR<GuildsResponse>('/api/guilds', fetcher)
   const { data: session, status: sessionStatus } = useSession()
 
   if (error) return <p>Error: {error}</p>
   if (isLoading) return <p>Loading...</p>
-
-  console.log(session)
 
   const selectNavItem = (item: NavItem) => {
     setSelectedGuild(undefined)

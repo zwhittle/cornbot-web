@@ -12,7 +12,6 @@ import GuildsList from '@/components/content/GuildsList'
 import MembersList from '@/components/content/MembersList'
 import Sidebar from '@/components/sidebar/Sidebar'
 import StatsWithTrending from '@/components/analytics/Stats'
-import { getServerSession } from 'next-auth'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },
@@ -27,7 +26,7 @@ export default function Home() {
   const [selectedGuild, setSelectedGuild] = useState<Guild | undefined>(undefined)
 
   const getMainContent = () => {
-    if (selectedGuild) return <MembersList />
+    if (selectedGuild) return <MembersList guild={selectedGuild} />
 
     if (selectedSidbarItem === navigation[0].name) return <GuildsList />
     if (selectedSidbarItem === navigation[1].name) return <StatsWithTrending />

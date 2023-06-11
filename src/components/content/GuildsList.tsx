@@ -1,4 +1,5 @@
-import { GuildsResponse } from '@/pages/api/getGuilds'
+
+import { GuildsResponse } from '@/pages/api/guilds'
 import { Guild } from '@/utils/types'
 import { fetcher } from '@/utils/utils'
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/20/solid'
@@ -6,7 +7,7 @@ import { format, parseJSON } from 'date-fns'
 import useSWR from 'swr'
 
 export default function GuildsList() {
-  const { data, error, isLoading } = useSWR<GuildsResponse>('/api/getGuilds', fetcher)
+  const { data, error, isLoading } = useSWR<GuildsResponse>('/api/guilds', fetcher)
 
   if (error) return <p>Error: {error}</p>
   if (isLoading) return <p>Loading...</p>

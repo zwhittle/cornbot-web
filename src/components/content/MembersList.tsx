@@ -1,11 +1,16 @@
 import { MembersResponse } from '@/pages/api/getMembers'
+import { Guild } from '@/utils/types'
 import { fetcher } from '@/utils/utils'
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/20/solid'
 import { format, parseJSON } from 'date-fns'
 import useSWR from 'swr'
 
-export default function MembersList() {
-  const { data, error, isLoading } = useSWR<MembersResponse>('/api/getMembers', fetcher)
+type MembersListProps = {
+  guild: Guild
+}
+
+export default function MembersList({ guild }: MembersListProps) {
+  const { data, error, isLoading } = useSWR<MembersResponse>(`/api/guilds/${guild.id}/members`, fetcher)
 
   if (error) return <p>Error: {error}</p>
   if (isLoading) return <p>Loading...</p>

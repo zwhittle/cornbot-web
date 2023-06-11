@@ -1,4 +1,4 @@
-import { AnalyticsEvent, Guild } from '@/utils/types'
+import { Guild } from '@/utils/types'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export interface GuildsResponse {
@@ -6,7 +6,7 @@ export interface GuildsResponse {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<GuildsResponse>) {
-  console.log('data api request')
+  console.log('all guilds request')
   const api_domain = process.env.API_DOMAIN
   
   console.log(api_domain + '/guilds')
