@@ -27,6 +27,12 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedSidbarItem, setSelectedSidebarItem] = useState(navigation[2].name)
 
+  const getMainContent = () => {
+    if (selectedSidbarItem === navigation[0].name) return <GuildsList />
+    else if (selectedSidbarItem === navigation[1].name) return <MembersList />
+    else return <GuildsList />
+  }
+
   return (
     <>
       <div>
@@ -74,8 +80,8 @@ export default function Home() {
               <SortDropdown />
             </header>
 
-            {/* <GuildsList /> */}
-            <MembersList />
+            {/* Main Content */}
+            {getMainContent()}
           </main>
 
           {/* Activity feed */}
