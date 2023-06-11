@@ -5,13 +5,13 @@ import {
   GlobeAltIcon,
   SignalIcon,
 } from '@heroicons/react/24/outline'
+import Sidebar from '@/components/Sidebar'
+import { Guild } from '@/utils/types'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import SortDropdown from '@/components/SortDropdown'
 import GuildsList from '@/components/content/GuildsList'
 import MembersList from '@/components/content/MembersList'
-import { Guild } from '@/utils/types'
 import StatsWithTrending from '@/components/Stats'
-import Sidebar from '@/components/Sidebar'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },
