@@ -17,14 +17,12 @@ type SidebarBaseProps = {
   setSelectedItem: Dispatch<SetStateAction<string>>
   navItems: {
     name: string
-    href: string
     icon: ForwardRefExoticComponent<
       Omit<SVGProps<SVGSVGElement>, 'ref'> & {
         title?: string | undefined
         titleId?: string | undefined
       } & RefAttributes<SVGSVGElement>
     >
-    current: boolean
   }[]
 }
 
@@ -51,7 +49,7 @@ export default function SidebarBase({ selectedItem, setSelectedItem, navItems }:
               {navItems.map(item => (
                 <li key={item.name} onClick={() => setSelectedItem(item.name)}>
                   <a
-                    href={item.href}
+                  href='#'
                     className={`${
                       selectedItem === item.name
                         ? 'bg-gray-800 text-white'

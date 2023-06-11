@@ -6,21 +6,18 @@ import {
   ServerIcon,
   SignalIcon,
 } from '@heroicons/react/24/outline'
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-} from '@heroicons/react/20/solid'
+import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import SortDropdown from '@/components/SortDropdown'
 import GuildsList from '@/components/GuildsList'
 import Sidebar from '@/components/Sidebar'
 import MembersList from '@/components/MembersList'
 
 const navigation = [
-  { name: 'Guilds', href: '#', icon: FolderIcon, current: true },
-  { name: 'Members', href: '#', icon: ServerIcon, current: false },
-  { name: 'Analytics', href: '#', icon: SignalIcon, current: false },
-  { name: 'Tours', href: '#', icon: GlobeAltIcon, current: false },
-  { name: 'Settings', href: '#', icon: Cog6ToothIcon, current: false },
+  { name: 'Guilds', icon: FolderIcon },
+  { name: 'Members', icon: ServerIcon },
+  { name: 'Analytics', icon: SignalIcon },
+  { name: 'Tours', icon: GlobeAltIcon },
+  { name: 'Settings', icon: Cog6ToothIcon },
 ]
 
 export default function Home() {
@@ -36,7 +33,13 @@ export default function Home() {
   return (
     <>
       <div>
-        <Sidebar navItems={navigation} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} selectedItem={selectedSidbarItem} setSelectedItem={setSelectedSidebarItem} />
+        <Sidebar
+          navItems={navigation}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          selectedItem={selectedSidbarItem}
+          setSelectedItem={setSelectedSidebarItem}
+        />
 
         <div className='xl:pl-72'>
           {/* Sticky search header */}

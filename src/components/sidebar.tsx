@@ -35,14 +35,12 @@ type SidebarProps = {
   setSelectedItem: Dispatch<SetStateAction<string>>
   navItems: {
     name: string
-    href: string
     icon: ForwardRefExoticComponent<
       Omit<SVGProps<SVGSVGElement>, 'ref'> & {
         title?: string | undefined
         titleId?: string | undefined
       } & RefAttributes<SVGSVGElement>
     >
-    current: boolean
   }[]
 }
 
