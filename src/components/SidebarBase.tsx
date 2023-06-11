@@ -10,28 +10,41 @@ import { GuildsResponse } from '@/pages/api/getGuilds'
 import { fetcher } from '@/utils/utils'
 import { useSession } from 'next-auth/react'
 import { Dispatch, ForwardRefExoticComponent, RefAttributes, SVGProps, SetStateAction } from 'react'
+import { Guild } from '@/utils/types'
 
+export type NavItem = {
+  name: string
+  icon: ForwardRefExoticComponent<
+    Omit<SVGProps<SVGSVGElement>, 'ref'> & {
+      title?: string | undefined
+      titleId?: string | undefined
+    } & RefAttributes<SVGSVGElement>
+  >
+}
 
 type SidebarBaseProps = {
   selectedItem: string
   setSelectedItem: Dispatch<SetStateAction<string>>
-  navItems: {
-    name: string
-    icon: ForwardRefExoticComponent<
-      Omit<SVGProps<SVGSVGElement>, 'ref'> & {
-        title?: string | undefined
-        titleId?: string | undefined
-      } & RefAttributes<SVGSVGElement>
-    >
-  }[]
+  selectedGuild?: Guild
+  setSelectedGuild: Dispatch<SetStateAction<Guild | undefined>>
+  navItems: NavItem[]
 }
 
-export default function SidebarBase({ selectedItem, setSelectedItem, navItems }: SidebarBaseProps) {
+export default function SidebarBase({ selectedItem, setSelectedItem, selectedGuild, setSelectedGuild, navItems }: SidebarBaseProps) {
   const { data, error, isLoading } = useSWR<GuildsResponse>('/api/getGuilds', fetcher)
   const { data: session, status: sessionStatus } = useSession()
 
   if (error) return <p>Error: {error}</p>
   if (isLoading) return <p>Loading...</p>
+
+  const selectNavItem = (item: NavItem) => {
+    setSelectedGuild(undefined)
+    setSelectedItem(item.name)
+  }
+
+  const selectGuild = (guild: Guild) => {
+    setSelectedGuild(guild)
+  }
 
   return (
     <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/10'>
@@ -47,11 +60,11 @@ export default function SidebarBase({ selectedItem, setSelectedItem, navItems }:
           <li>
             <ul role='list' className='-mx-2 space-y-1'>
               {navItems.map(item => (
-                <li key={item.name} onClick={() => setSelectedItem(item.name)}>
+                <li key={item.name} onClick={() => selectNavItem(item)}>
                   <a
                   href='#'
                     className={`${
-                      selectedItem === item.name
+                      selectedGuild === undefined && selectedItem === item.name
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:text-white hover:bg-gray-800'
                     } group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold`}
@@ -68,10 +81,14 @@ export default function SidebarBase({ selectedItem, setSelectedItem, navItems }:
             {data && (
               <ul role='list' className='-mx-2 mt-2 space-y-1'>
                 {data.guilds.map(guild => (
-                  <li key={guild.name}>
+                  <li key={guild.name} onClick={() => selectGuild(guild)}>
                     <a
-                      href={'#'}
-                      className='text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                      href='#'
+                      className={`${
+                        selectedGuild === guild
+                          ? 'bg-gray-800 text-white'
+                          : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                      } group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold`}
                     >
                       <span className='flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white'>
                         {guild.name[0]}

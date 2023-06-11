@@ -27,12 +27,15 @@ import SidebarBase from './SidebarBase'
 import useSWR from 'swr'
 import { GuildsResponse } from '@/pages/api/getGuilds'
 import { fetcher } from '@/utils/utils'
+import { Guild } from '@/utils/types'
 
 type SidebarProps = {
   sidebarOpen: boolean
   setSidebarOpen: Dispatch<SetStateAction<boolean>>
   selectedItem: string
   setSelectedItem: Dispatch<SetStateAction<string>>
+  selectedGuild?: Guild
+  setSelectedGuild: Dispatch<SetStateAction<Guild | undefined>>
   navItems: {
     name: string
     icon: ForwardRefExoticComponent<
@@ -49,7 +52,9 @@ export default function Sidebar({
   setSidebarOpen,
   selectedItem,
   setSelectedItem,
-  navItems
+  selectedGuild,
+  setSelectedGuild,
+  navItems,
 }: SidebarProps) {
   return (
     <Fragment>
@@ -100,7 +105,13 @@ export default function Sidebar({
                 </Transition.Child>
 
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <SidebarBase navItems={navItems} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+                <SidebarBase
+                  navItems={navItems}
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                  selectedGuild={selectedGuild}
+                  setSelectedGuild={setSelectedGuild}
+                />
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -110,7 +121,13 @@ export default function Sidebar({
       {/* Static sidebar for desktop */}
       <div className='hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col'>
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <SidebarBase navItems={navItems} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+        <SidebarBase
+          navItems={navItems}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          selectedGuild={selectedGuild}
+          setSelectedGuild={setSelectedGuild}
+        />
       </div>
     </Fragment>
   )

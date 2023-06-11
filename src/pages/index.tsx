@@ -8,13 +8,13 @@ import {
 } from '@heroicons/react/24/outline'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import SortDropdown from '@/components/SortDropdown'
-import GuildsList from '@/components/GuildsList'
+import GuildsList from '@/components/content/GuildsList'
 import Sidebar from '@/components/Sidebar'
-import MembersList from '@/components/MembersList'
+import MembersList from '@/components/content/MembersList'
+import { Guild } from '@/utils/types'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },
-  { name: 'Members', icon: ServerIcon },
   { name: 'Analytics', icon: SignalIcon },
   { name: 'Tours', icon: GlobeAltIcon },
   { name: 'Settings', icon: Cog6ToothIcon },
@@ -22,11 +22,14 @@ const navigation = [
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [selectedSidbarItem, setSelectedSidebarItem] = useState(navigation[2].name)
+  const [selectedSidbarItem, setSelectedSidebarItem] = useState(navigation[0].name)
+  const [selectedGuild, setSelectedGuild] = useState<Guild | undefined>(undefined)
 
   const getMainContent = () => {
+    if (selectedGuild) return <MembersList />
+
     if (selectedSidbarItem === navigation[0].name) return <GuildsList />
-    else if (selectedSidbarItem === navigation[1].name) return <MembersList />
+
     else return <GuildsList />
   }
 
@@ -39,6 +42,8 @@ export default function Home() {
           setSidebarOpen={setSidebarOpen}
           selectedItem={selectedSidbarItem}
           setSelectedItem={setSelectedSidebarItem}
+          selectedGuild={selectedGuild}
+          setSelectedGuild={setSelectedGuild}
         />
 
         <div className='xl:pl-72'>
