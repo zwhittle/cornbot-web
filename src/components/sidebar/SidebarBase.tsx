@@ -37,6 +37,8 @@ export default function SidebarBase({ selectedItem, setSelectedItem, selectedGui
   if (error) return <p>Error: {error}</p>
   if (isLoading) return <p>Loading...</p>
 
+  console.log(session)
+
   const selectNavItem = (item: NavItem) => {
     setSelectedGuild(undefined)
     setSelectedItem(item.name)

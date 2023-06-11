@@ -12,6 +12,7 @@ import GuildsList from '@/components/content/GuildsList'
 import MembersList from '@/components/content/MembersList'
 import Sidebar from '@/components/sidebar/Sidebar'
 import StatsWithTrending from '@/components/analytics/Stats'
+import { getServerSession } from 'next-auth'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },
