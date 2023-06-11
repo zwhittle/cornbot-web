@@ -10,8 +10,8 @@ import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import SortDropdown from '@/components/SortDropdown'
 import GuildsList from '@/components/content/GuildsList'
 import MembersList from '@/components/content/MembersList'
-import Sidebar from '../components/Sidebar'
-import StatsWithTrending from '../components/Stats'
+import Sidebar from '@/components/sidebar/Sidebar'
+import StatsWithTrending from '@/components/analytics/Stats'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },

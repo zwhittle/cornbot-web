@@ -1,7 +1,5 @@
 import { AnalyticsApiData } from '@/pages/api/getAnalytics'
-import { AnalyticsEvent } from '@/utils/types'
 import { fetcher } from '@/utils/utils'
-import { format } from 'date-fns'
 import useSWR from 'swr'
 
 export default function EventsTable() {

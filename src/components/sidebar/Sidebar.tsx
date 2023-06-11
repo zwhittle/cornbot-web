@@ -1,15 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {
-  Dispatch,
-  ForwardRefExoticComponent,
-  Fragment,
-  RefAttributes,
-  SVGProps,
-  SetStateAction,
-} from 'react'
-import {
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
+import { Dispatch, Fragment, SetStateAction } from 'react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import SidebarBase, { NavItem } from './SidebarBase'
 import { Guild } from '@/utils/types'
 

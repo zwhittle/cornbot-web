@@ -1,6 +1,5 @@
 import useSWR from 'swr'
-import { AnalyticsApiData } from '../pages/api/getAnalytics'
-import { AnalyticsEvent } from '@/utils/types'
+import { AnalyticsApiData } from '../../pages/api/getAnalytics'
 import { fetcher } from '@/utils/utils'
 
 function classNames(...classes: string[]) {
