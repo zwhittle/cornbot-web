@@ -9,16 +9,26 @@ import useSWR from 'swr'
 import { GuildsResponse } from '@/pages/api/getGuilds'
 import { fetcher } from '@/utils/utils'
 import { useSession } from 'next-auth/react'
+import { Dispatch, ForwardRefExoticComponent, RefAttributes, SVGProps, SetStateAction } from 'react'
 
-const navigation = [
-  { name: 'Guilds', href: '#', icon: FolderIcon, current: true },
-  { name: 'Members', href: '#', icon: ServerIcon, current: false },
-  { name: 'Analytics', href: '#', icon: SignalIcon, current: false },
-  { name: 'Tours', href: '#', icon: GlobeAltIcon, current: false },
-  { name: 'Settings', href: '#', icon: Cog6ToothIcon, current: false },
-]
 
-export default function SidebarBase() {
+type SidebarBaseProps = {
+  selectedItem: string
+  setSelectedItem: Dispatch<SetStateAction<string>>
+  navItems: {
+    name: string
+    href: string
+    icon: ForwardRefExoticComponent<
+      Omit<SVGProps<SVGSVGElement>, 'ref'> & {
+        title?: string | undefined
+        titleId?: string | undefined
+      } & RefAttributes<SVGSVGElement>
+    >
+    current: boolean
+  }[]
+}
+
+export default function SidebarBase({ selectedItem, setSelectedItem, navItems }: SidebarBaseProps) {
   const { data, error, isLoading } = useSWR<GuildsResponse>('/api/getGuilds', fetcher)
   const { data: session, status: sessionStatus } = useSession()
 
@@ -38,12 +48,12 @@ export default function SidebarBase() {
         <ul role='list' className='flex flex-1 flex-col gap-y-7'>
           <li>
             <ul role='list' className='-mx-2 space-y-1'>
-              {navigation.map(item => (
-                <li key={item.name}>
+              {navItems.map(item => (
+                <li key={item.name} onClick={() => setSelectedItem(item.name)}>
                   <a
                     href={item.href}
                     className={`${
-                      item.current
+                      selectedItem === item.name
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:text-white hover:bg-gray-800'
                     } group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold`}

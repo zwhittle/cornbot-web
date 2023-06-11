@@ -1,5 +1,13 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Dispatch, Fragment, SetStateAction, useState } from 'react'
+import {
+  Dispatch,
+  ForwardRefExoticComponent,
+  Fragment,
+  RefAttributes,
+  SVGProps,
+  SetStateAction,
+  useState,
+} from 'react'
 import {
   ChartBarSquareIcon,
   Cog6ToothIcon,
@@ -21,12 +29,30 @@ import { GuildsResponse } from '@/pages/api/getGuilds'
 import { fetcher } from '@/utils/utils'
 
 type SidebarProps = {
-    sidebarOpen: boolean
-    setSidebarOpen: Dispatch<SetStateAction<boolean>>
+  sidebarOpen: boolean
+  setSidebarOpen: Dispatch<SetStateAction<boolean>>
+  selectedItem: string
+  setSelectedItem: Dispatch<SetStateAction<string>>
+  navItems: {
+    name: string
+    href: string
+    icon: ForwardRefExoticComponent<
+      Omit<SVGProps<SVGSVGElement>, 'ref'> & {
+        title?: string | undefined
+        titleId?: string | undefined
+      } & RefAttributes<SVGSVGElement>
+    >
+    current: boolean
+  }[]
 }
 
-export default function Sidebar({sidebarOpen, setSidebarOpen}: SidebarProps) {
-
+export default function Sidebar({
+  sidebarOpen,
+  setSidebarOpen,
+  selectedItem,
+  setSelectedItem,
+  navItems
+}: SidebarProps) {
   return (
     <Fragment>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -76,7 +102,7 @@ export default function Sidebar({sidebarOpen, setSidebarOpen}: SidebarProps) {
                 </Transition.Child>
 
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <SidebarBase />
+                <SidebarBase navItems={navItems} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -86,7 +112,7 @@ export default function Sidebar({sidebarOpen, setSidebarOpen}: SidebarProps) {
       {/* Static sidebar for desktop */}
       <div className='hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col'>
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <SidebarBase />
+        <SidebarBase navItems={navItems} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
       </div>
     </Fragment>
   )

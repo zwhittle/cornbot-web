@@ -25,11 +25,12 @@ const navigation = [
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [selectedSidbarItem, setSelectedSidebarItem] = useState(navigation[2].name)
 
   return (
     <>
       <div>
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <Sidebar navItems={navigation} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} selectedItem={selectedSidbarItem} setSelectedItem={setSelectedSidebarItem} />
 
         <div className='xl:pl-72'>
           {/* Sticky search header */}
@@ -67,7 +68,7 @@ export default function Home() {
 
           <main className='lg:pr-96'>
             <header className='flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8'>
-              <h1 className='text-base font-semibold leading-7 text-white'>Guilds</h1>
+              <h1 className='text-base font-semibold leading-7 text-white'>{selectedSidbarItem}</h1>
 
               {/* Sort dropdown */}
               <SortDropdown />
