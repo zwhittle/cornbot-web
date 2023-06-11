@@ -1,11 +1,15 @@
+import { AnalyticsApiData } from '@/pages/api/getAnalytics'
 import { AnalyticsEvent } from '@/utils/types'
+import { fetcher } from '@/utils/utils'
 import { format } from 'date-fns'
+import useSWR from 'swr'
 
-type Props = {
-  events: AnalyticsEvent[]
-}
+export default function EventsTable() {
+  const { data, error, isLoading } = useSWR<AnalyticsApiData, Error>('/api/getAnalytics', fetcher)
 
-export default function EventsTable({ events }: Props) {
+  if (error) return <p>Error</p>
+  if (!data) return <p>Loading...</p>
+
   return (
     <div className='mt-8 flow-root'>
       <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -53,7 +57,7 @@ export default function EventsTable({ events }: Props) {
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-200 bg-white'>
-                {events && events.map(event => (
+                {data.events && data.events.map(event => (
                   <tr key={event.id}>
                     <td className='w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-2'>
                       {event.type}

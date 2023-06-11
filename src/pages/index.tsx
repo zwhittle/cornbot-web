@@ -12,6 +12,8 @@ import GuildsList from '@/components/content/GuildsList'
 import Sidebar from '@/components/Sidebar'
 import MembersList from '@/components/content/MembersList'
 import { Guild } from '@/utils/types'
+import StatsWithTrending from '@/components/stats'
+import EventsTable from '@/components/eventsTable'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },
@@ -29,6 +31,7 @@ export default function Home() {
     if (selectedGuild) return <MembersList />
 
     if (selectedSidbarItem === navigation[0].name) return <GuildsList />
+    if (selectedSidbarItem === navigation[1].name) return <StatsWithTrending />
 
     else return <GuildsList />
   }
