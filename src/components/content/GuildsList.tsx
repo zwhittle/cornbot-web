@@ -1,8 +1,12 @@
-
 import { GuildsResponse } from '@/pages/api/guilds'
 import { Guild } from '@/utils/types'
 import { fetcher } from '@/utils/utils'
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/20/solid'
+import {
+  EllipsisVerticalIcon,
+  EnvelopeIcon,
+  PencilIcon,
+  PhoneIcon,
+} from '@heroicons/react/20/solid'
 import { format, parseJSON } from 'date-fns'
 import useSWR from 'swr'
 
@@ -19,7 +23,7 @@ export default function GuildsList() {
           {data.guilds.map(guild => (
             <li
               key={guild.id}
-              className='col-span-1 flex flex-col divide divide-gray-200 rounded-lg bg-white text-center shadow'
+              className='col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow'
             >
               <div className='flex flex-1 flex-col p-8'>
                 <img
@@ -40,26 +44,26 @@ export default function GuildsList() {
                 </dl>
               </div>
               <div>
-                {/* <div className='-mt-px flex divide-x divide-gray-200'>
-              <div className='flex w-0 flex-1'>
-                <a
-                  href={`#`}
-                  className='relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900'
-                >
-                  <EnvelopeIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
-                  Email
-                </a>
-              </div>
-              <div className='-ml-px flex w-0 flex-1'>
-                <a
-                  href={`#`}
-                  className='relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900'
-                >
-                  <PhoneIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
-                  Call
-                </a>
-              </div>
-            </div> */}
+                <div className='-mt-px flex divide-x divide-gray-200'>
+                  <div className='flex w-0 flex-1'>
+                    <a
+                      href={`#`}
+                      className='relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900'
+                    >
+                      <PencilIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
+                      Edit
+                    </a>
+                  </div>
+                  <div className='-ml-px flex w-0 flex-1'>
+                    <a
+                      href={`#`}
+                      className='relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900'
+                    >
+                      <EllipsisVerticalIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
+                      Actions
+                    </a>
+                  </div>
+                </div>
               </div>
             </li>
           ))}

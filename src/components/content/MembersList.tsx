@@ -1,8 +1,7 @@
 import { MembersResponse } from '@/pages/api/getMembers'
 import { Guild } from '@/utils/types'
 import { fetcher } from '@/utils/utils'
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/20/solid'
-import { format, parseJSON } from 'date-fns'
+import { EllipsisVerticalIcon, PencilIcon } from '@heroicons/react/20/solid'
 import useSWR from 'swr'
 
 type MembersListProps = {
@@ -48,8 +47,8 @@ export default function MembersList({ guild }: MembersListProps) {
                       href={`#`}
                       className='relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900'
                     >
-                      <EnvelopeIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
-                      Email
+                      <PencilIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
+                      Edit
                     </a>
                   </div>
                   <div className='-ml-px flex w-0 flex-1'>
@@ -57,8 +56,8 @@ export default function MembersList({ guild }: MembersListProps) {
                       href={`#`}
                       className='relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900'
                     >
-                      <PhoneIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
-                      Call
+                      <EllipsisVerticalIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
+                      Actions
                     </a>
                   </div>
                 </div>
