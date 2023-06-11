@@ -3,7 +3,6 @@ import {
   Cog6ToothIcon,
   FolderIcon,
   GlobeAltIcon,
-  ServerIcon,
   SignalIcon,
 } from '@heroicons/react/24/outline'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
@@ -12,8 +11,7 @@ import GuildsList from '@/components/content/GuildsList'
 import Sidebar from '@/components/Sidebar'
 import MembersList from '@/components/content/MembersList'
 import { Guild } from '@/utils/types'
-import StatsWithTrending from '@/components/stats'
-import EventsTable from '@/components/eventsTable'
+import StatsWithTrending from '@/components/Stats'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },

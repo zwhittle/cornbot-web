@@ -6,27 +6,11 @@ import {
   RefAttributes,
   SVGProps,
   SetStateAction,
-  useState,
 } from 'react'
 import {
-  ChartBarSquareIcon,
-  Cog6ToothIcon,
-  FolderIcon,
-  GlobeAltIcon,
-  ServerIcon,
-  SignalIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import {
-  Bars3Icon,
-  ChevronRightIcon,
-  ChevronUpDownIcon,
-  MagnifyingGlassIcon,
-} from '@heroicons/react/20/solid'
-import SidebarBase from './SidebarBase'
-import useSWR from 'swr'
-import { GuildsResponse } from '@/pages/api/getGuilds'
-import { fetcher } from '@/utils/utils'
+import SidebarBase, { NavItem } from './SidebarBase'
 import { Guild } from '@/utils/types'
 
 type SidebarProps = {
@@ -36,15 +20,7 @@ type SidebarProps = {
   setSelectedItem: Dispatch<SetStateAction<string>>
   selectedGuild?: Guild
   setSelectedGuild: Dispatch<SetStateAction<Guild | undefined>>
-  navItems: {
-    name: string
-    icon: ForwardRefExoticComponent<
-      Omit<SVGProps<SVGSVGElement>, 'ref'> & {
-        title?: string | undefined
-        titleId?: string | undefined
-      } & RefAttributes<SVGSVGElement>
-    >
-  }[]
+  navItems: NavItem[]
 }
 
 export default function Sidebar({
