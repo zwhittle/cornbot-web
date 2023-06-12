@@ -5,7 +5,7 @@ export interface AnalyticsEvent {
   guildId?: string
   channelId?: string
   memberId?: string
-  timestamp?: Date
+  timestamp?: string
 }
 
 export interface Guild {
