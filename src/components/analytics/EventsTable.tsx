@@ -1,9 +1,13 @@
-import { AnalyticsApiData } from '@/pages/api/getAnalytics'
+import { AnalyticsApiResponse } from '@/pages/api/analytics'
 import { fetcher } from '@/utils/utils'
+import { parseISO } from 'date-fns'
 import useSWR from 'swr'
 
 export default function EventsTable() {
-  const { data, error, isLoading } = useSWR<AnalyticsApiData, Error>('/api/getAnalytics', fetcher)
+  const { data, error, isLoading } = useSWR<AnalyticsApiResponse, Error>(
+    '/api/getAnalytics',
+    fetcher
+  )
 
   if (error) return <p>Error</p>
   if (!data) return <p>Loading...</p>
@@ -55,40 +59,47 @@ export default function EventsTable() {
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-200 bg-white'>
-                {data.events && data.events.map(event => (
-                  <tr key={event.id}>
-                    <td className='w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-2'>
-                      {event.type}
-                      <dl className='font-normal lg:hidden'>
-                        <dt className='sr-only'>Type</dt>
-                        <dd className='mt-1 truncate text-gray-700'>{event.event}</dd>
-                        <dt className='sr-only sm:hidden'>Guild</dt>
-                        <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.guildId}</dd>
-                        <dt className='sr-only sm:hidden'>Channel</dt>
-                        <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.channelId}</dd>
-                        <dt className='sr-only sm:hidden'>Member</dt>
-                        <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.memberId}</dd>
-                        <dt className='sr-only sm:hidden'>Timestamp</dt>
-                        <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.timestamp?.toString()}</dd>
-                      </dl>
-                    </td>
-                    <td className='hidden px-3 py-4 text-sm text-gray-500 lg:table-cell'>
-                      {event.event}
-                    </td>
-                    <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
-                      {event.guildId}
-                    </td>
-                    <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
-                      {event.channelId}
-                    </td>
-                    <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
-                      {event.memberId}
-                    </td>
-                    <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
-                      {event.timestamp?.toLocaleString('en-us', {timeZone: 'CST'})}
-                    </td>
-                  </tr>
-                ))}
+                {data.events &&
+                  data.events.map(event => (
+                    <tr key={event.id}>
+                      <td className='w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-2'>
+                        {event.type}
+                        <dl className='font-normal lg:hidden'>
+                          <dt className='sr-only'>Type</dt>
+                          <dd className='mt-1 truncate text-gray-700'>{event.event}</dd>
+                          <dt className='sr-only sm:hidden'>Guild</dt>
+                          <dd className='mt-1 truncate text-gray-500 sm:hidden'>{event.guildId}</dd>
+                          <dt className='sr-only sm:hidden'>Channel</dt>
+                          <dd className='mt-1 truncate text-gray-500 sm:hidden'>
+                            {event.channelId}
+                          </dd>
+                          <dt className='sr-only sm:hidden'>Member</dt>
+                          <dd className='mt-1 truncate text-gray-500 sm:hidden'>
+                            {event.memberId}
+                          </dd>
+                          <dt className='sr-only sm:hidden'>Timestamp</dt>
+                          <dd className='mt-1 truncate text-gray-500 sm:hidden'>
+                            {event.timestamp?.toString()}
+                          </dd>
+                        </dl>
+                      </td>
+                      <td className='hidden px-3 py-4 text-sm text-gray-500 lg:table-cell'>
+                        {event.event}
+                      </td>
+                      <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
+                        {event.guildId}
+                      </td>
+                      <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
+                        {event.channelId}
+                      </td>
+                      <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
+                        {event.memberId}
+                      </td>
+                      <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
+                        {parseISO(event.timestamp)?.toLocaleString('en-us', { timeZone: 'CST' })}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
