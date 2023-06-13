@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { AnalyticsApiData } from '../../pages/api/getAnalytics'
+import { AnalyticsApiResponse } from '../../pages/api/analytics'
 import { fetcher } from '@/utils/utils'
 
 function classNames(...classes: string[]) {
@@ -7,7 +7,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function StatsWithTrending() {
-  const { data, error, isLoading } = useSWR<AnalyticsApiData, Error>('/api/getAnalytics', fetcher)
+  const { data, error, isLoading } = useSWR<AnalyticsApiResponse, Error>('/api/getAnalytics', fetcher)
 
   if (isLoading) return <p>Loading...</p>
   if (error) return <p>Error</p>
