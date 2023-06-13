@@ -1,10 +1,5 @@
 import { useState } from 'react'
-import {
-  Cog6ToothIcon,
-  FolderIcon,
-  GlobeAltIcon,
-  SignalIcon,
-} from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, FolderIcon, GlobeAltIcon, SignalIcon } from '@heroicons/react/24/outline'
 import { Guild } from '@/utils/types'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import SortDropdown from '@/components/SortDropdown'
@@ -12,6 +7,7 @@ import GuildsList from '@/components/content/GuildsList'
 import MembersList from '@/components/content/MembersList'
 import Sidebar from '@/components/sidebar/Sidebar'
 import StatsWithTrending from '@/components/analytics/Stats'
+import ActivityFeed from '@/components/activity/ActivityFeed'
 
 const navigation = [
   { name: 'Guilds', icon: FolderIcon },
@@ -30,7 +26,6 @@ export default function Home() {
 
     if (selectedSidbarItem === navigation[0].name) return <GuildsList />
     if (selectedSidbarItem === navigation[1].name) return <StatsWithTrending />
-
     else return <GuildsList />
   }
 
@@ -83,7 +78,9 @@ export default function Home() {
 
           <main className='lg:pr-96'>
             <header className='flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8'>
-              <h1 className='text-base font-semibold leading-7 text-white'>{selectedGuild?.name ?? selectedSidbarItem}</h1>
+              <h1 className='text-base font-semibold leading-7 text-white'>
+                {selectedGuild?.name ?? selectedSidbarItem}
+              </h1>
 
               {/* Sort dropdown */}
               <SortDropdown />
@@ -101,30 +98,7 @@ export default function Home() {
                 View all
               </a>
             </header>
-            <ul role='list' className='divide-y divide-white/5'>
-              {/* {activityItems.map(item => (
-                <li key={item.commit} className='px-4 py-4 sm:px-6 lg:px-8'>
-                  <div className='flex items-center gap-x-3'>
-                    <img
-                      src={item.user.imageUrl}
-                      alt=''
-                      className='h-6 w-6 flex-none rounded-full bg-gray-800'
-                    />
-                    <h3 className='flex-auto truncate text-sm font-semibold leading-6 text-white'>
-                      {item.user.name}
-                    </h3>
-                    <time dateTime={item.dateTime} className='flex-none text-xs text-gray-600'>
-                      {item.date}
-                    </time>
-                  </div>
-                  <p className='mt-3 truncate text-sm text-gray-500'>
-                    Pushed to <span className='text-gray-400'>{item.projectName}</span> (
-                    <span className='font-mono text-gray-400'>{item.commit}</span> on{' '}
-                    <span className='text-gray-400'>{item.branch}</span>)
-                  </p>
-                </li>
-              ))} */}
-            </ul>
+            <ActivityFeed />
           </aside>
         </div>
       </div>

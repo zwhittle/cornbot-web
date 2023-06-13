@@ -3,9 +3,13 @@ export interface AnalyticsEvent {
   type: string
   event: string
   guildId?: string
+  guild: Guild
   channelId?: string
   memberId?: string
-  timestamp?: Date
+  member?: Member
+  timestamp: string
+  messageId?: string
+  message?: Message
 }
 
 export interface Guild {
@@ -41,4 +45,17 @@ export interface Member {
   corns: number
   createdAt: Date
   updatedAt: Date
+}
+
+export interface Message {
+  id: string
+  authorId: string
+  author?: Member
+  guildId: string
+  guild?: Guild
+  channelId: string
+  content: string
+  discordCreatedAt: Date
+  editable: boolean
+  url: string
 }
