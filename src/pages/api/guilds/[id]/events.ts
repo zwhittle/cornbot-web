@@ -2,7 +2,11 @@ import { AnalyticsEvent, Member } from '@/utils/types'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export interface GuildActivityResponse {
-  events: AnalyticsEvent[]
+    page: number
+    pageSize: number
+    pageCount: number
+    recordCount: number
+    events: AnalyticsEvent[]
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<GuildActivityResponse>) {
@@ -18,9 +22,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (events_res.status != (200 || 201)) {
     console.log('Internal Server Error')
   } else {
-    const events_data = await events_res.json()
+    const res_json = await events_res.json()
     res.status(200).json({
-      events: events_data,
-    })
+        page: res_json.page,
+        pageSize: res_json.pageSize,
+        pageCount: res_json.pageCount,
+        recordCount: res_json.recordCount,
+        events: res_json.data,
+      })
   }
 }

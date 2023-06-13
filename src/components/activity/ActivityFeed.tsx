@@ -1,15 +1,15 @@
-import { AnalyticsApiData } from '@/pages/api/getAnalytics'
+import { AnalyticsApiResponse } from '@/pages/api/analytics'
 import { fetcher } from '@/utils/utils'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import useSWR from 'swr'
 
 export default function ActivityFeed() {
-  const { data, error, isLoading } = useSWR<AnalyticsApiData, Error>('/api/getAnalytics', fetcher)
+  const { data, error, isLoading } = useSWR<AnalyticsApiResponse, Error>('/api/analytics', fetcher)
 
   if (error) return <p>Error</p>
   if (!data) return <p>Loading...</p>
 
-  data.events.sort((a, b) => b.timestamp > a.timestamp ? 1 : -1)
+  data.events.sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1))
 
   return (
     <ul role='list' className='divide-y divide-gray-800 py-1 px-3'>
